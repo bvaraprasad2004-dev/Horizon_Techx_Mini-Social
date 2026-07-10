@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Network</title>
+
+    <link rel="stylesheet" href="{% static 'css/netmesnot.css' %}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <h1 class="page-title">
+
+        <i class="fa-solid fa-user-group"></i>
+
+        People You May Know
+
+    </h1>
+
+    {% for user in users %}
+
+    <div class="card user-card">
+
+        <div class="user-left">
+
+            <img src="{% static 'images/default.png' %}" alt="Profile">
+
+            <div>
+
+               <h3 class="user-name">
+
+    <a href="{% url 'user_profile' user.id %}">
+        {{ user.username }}
+    </a>
+
+</h3>
+
+                <p class="user-job">
+
+                    ConnectMe Member
+
+                </p>
+
+            </div>
+
+        </div>
+
+        {% if user.id in sent_requests %}
+
+<button class="connect-btn" disabled>
+    Request Sent
+</button>
+
+{% else %}
+
+<a href="{% url 'connect_user' user.id %}" class="connect-btn">
+    <i class="fa-solid fa-user-plus"></i>
+    Connect
+</a>
+
+{% endif %}
+
+    </div>
+
+    {% empty %}
+
+    <div class="card">
+
+        <p>No users found.</p>
+
+    </div>
+
+    {% endfor %}
+
+    <a href="{% url 'home' %}" class="back-btn">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Home
+
+    </a>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Profile | ConnectMe</title>
+
+<link rel="stylesheet" href="css/profile.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+
+<i class="fa-solid fa-comments"></i>
+
+<h2>ConnectMe</h2>
+
+</div>
+
+<div>
+
+<a href="home.html">
+<i class="fa-solid fa-house"></i> Home
+</a>
+
+<button onclick="logout()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</button>
+
+</div>
+
+</nav>
+
+<div class="cover">
+
+<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=1200">
+
+</div>
+
+<div class="profile-card">
+
+<img id="profileImage"
+src="https://i.pravatar.cc/150?img=12">
+
+<h1 id="profileName"></h1>
+
+<p id="profileEmail"></p>
+
+<button onclick="editProfile()">
+
+Edit Profile
+
+</button>
+
+</div>
+
+<div class="stats">
+
+<div>
+
+<h2 id="postCount">0</h2>
+
+<p>Posts</p>
+
+</div>
+
+<div>
+
+<h2>520</h2>
+
+<p>Friends</p>
+
+</div>
+
+<div>
+
+<h2>120</h2>
+
+<p>Following</p>
+
+</div>
+
+</div>
+
+<div class="about">
+
+<h2>About Me</h2>
+
+<p id="aboutText">
+
+Welcome to ConnectMe.
+
+This is my profile.
+
+</p>
+
+</div>
+
+<div class="my-posts">
+
+<h2>My Posts</h2>
+
+<div id="userPosts"></div>
+
+</div>
+
+<script src="css/profile.js"></script>
+
+</body>
+</html>

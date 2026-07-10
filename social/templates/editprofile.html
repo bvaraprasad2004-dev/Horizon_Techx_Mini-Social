@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Edit Profile</title>
+
+<link rel="stylesheet" href="css/editprofile.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Edit Profile</h2>
+
+<label>Cover Photo</label><br>
+
+<input type="file" name="cover_photo">
+
+<br><br>
+
+<img
+id="preview"
+src="https://i.pravatar.cc/150?img=12"
+width="120">
+
+<input
+type="file"
+id="profileImage">
+
+<input
+type="text"
+id="username"
+placeholder="Username">
+
+<textarea
+id="bio"
+placeholder="Write your bio"></textarea>
+
+<button onclick="saveProfile()">
+
+Save Changes
+
+</button>
+
+</div>
+
+<script src="editprofile.js"></script>
+
+</body>
+
+</html>

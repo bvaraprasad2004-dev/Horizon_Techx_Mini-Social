@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ConnectMe - Login</title>
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+
+<body>
+
+
+<div class="login-container">
+
+    <div class="login-box">
+
+
+        <h1>🌐 ConnectMe</h1>
+
+        <p>Login to your account</p>
+
+
+
+       <form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+
+    <label>Email Address</label>
+    <input type="email" name="email" required>
+
+    <label>Password</label>
+    <input type="password" name="password" required>
+
+    <button type="submit">Login</button>
+</form>
+
+<p>
+    Don't have an account?
+    <a href="{% url 'register' %}">Register</a>
+</p>
+
+    </div>
+
+</div>
+
+
+
+<script src="{% static 'js/user.js' %}"></script>
+
+
+</body>
+
+</html>
