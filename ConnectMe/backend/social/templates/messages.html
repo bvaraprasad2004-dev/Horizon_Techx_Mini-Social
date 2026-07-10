@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Messages</title>
+
+    <link rel="stylesheet" href="{% static 'css/netmesnot.css' %}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <h1 class="page-title">
+
+        <i class="fa-solid fa-comment-dots"></i>
+
+        Messages
+
+    </h1>
+
+    {% for chat in chats %}
+
+    <div class="card chat-item">
+
+        <div class="chat-avatar">
+
+            <img src="{% static 'images/default.png' %}" alt="User">
+
+        </div>
+
+        <div class="chat-content">
+
+            <h3 class="chat-name">
+
+                {{ chat.name }}
+
+            </h3>
+
+            <p class="chat-message">
+
+                {{ chat.message }}
+
+            </p>
+
+        </div>
+
+        <div class="chat-time">
+
+            Just Now
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="card">
+
+        <p>No messages available.</p>
+
+    </div>
+
+    {% endfor %}
+
+    <a href="{% url 'home' %}" class="back-btn">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Home
+
+    </a>
+
+</div>
+
+</body>
+
+</html>

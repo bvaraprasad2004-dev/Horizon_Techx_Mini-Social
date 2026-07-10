@@ -1,0 +1,810 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ConnectMe</title>
+
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ========================= NAVBAR ========================= -->
+
+<nav class="navbar">
+
+    <!-- Logo -->
+
+    <div class="nav-left">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-globe"></i>
+
+            <span>ConnectMe</span>
+
+        </div>
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                placeholder="Search people, posts, jobs">
+
+        </div>
+
+    </div>
+
+    <!-- Center Menu -->
+
+    <div class="nav-center">
+
+        <a href="#" class="active">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>Home</span>
+
+        </a>
+
+       <a href="{% url 'network' %}">
+
+            <i class="fa-solid fa-user-group"></i>
+
+            <span>Network</span>
+
+        </a>
+
+        <a href="{% url 'messages' %}">
+
+            <i class="fa-solid fa-comment-dots"></i>
+
+            <span>Messages</span>
+
+        </a>
+
+        <a href="{% url 'notifications' %}">
+
+            <i class="fa-solid fa-bell"></i>
+
+            <span>Notifications</span>
+
+        </a>
+
+    </div>
+
+    <!-- Right Menu -->
+
+    <div class="nav-right">
+
+        <a href="{% url 'edit_profile' %}" class="profile-link">
+
+            {% if request.user.profile.profile_picture %}
+                <img src="{{ request.user.profile.profile_picture.url }}">
+            {% else %}
+                <img src="{% static 'images/default (2).webp' %}">
+            {% endif %}
+
+            <span>{{ request.user.username }}</span>
+
+        </a>
+
+        <a href="{% url 'logout' %}" class="logout-btn">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- ========================= MAIN CONTAINER ========================= -->
+
+<div class="main-container">
+
+<!-- ========================= LEFT SIDEBAR ========================= -->
+
+<aside class="left-sidebar">
+
+    <!-- Profile Card -->
+
+    <div class="card profile-card">
+
+        <!-- Cover Image -->
+
+       <!-- Cover Image -->
+
+<div class="cover-photo">
+
+    {% if request.user.profile.cover_photo %}
+
+        <img src="{{ request.user.profile.cover_photo.url }}" alt="Cover">
+
+    {% else %}
+
+        <img src="{% static 'images/cover.webp' %}" alt="Cover">
+
+    {% endif %}
+
+</div>
+
+        <!-- Profile Image -->
+
+        <div class="profile-image">
+
+            {% if request.user.profile.profile_picture %}
+
+                <img src="{{ request.user.profile.profile_picture.url }}">
+
+            {% else %}
+
+                <img src="{% static 'images/default (2).webp' %}">
+
+            {% endif %}
+
+        </div>
+
+        <!-- User Details -->
+
+        <div class="profile-info">
+
+            <h2>
+
+                {% if request.user.first_name %}
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                {% else %}
+                    {{ request.user.username }}
+                {% endif %}
+
+            </h2>
+
+            <p class="designation">
+
+                {{ request.user.profile.bio|default:"Software Developer" }}
+
+            </p>
+
+            <p class="location">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                {{ request.user.profile.location|default:"Hyderabad, India" }}
+
+            </p>
+
+        </div>
+
+        <hr>
+
+        <!-- Statistics -->
+
+        <div class="profile-stats">
+
+            <div>
+
+                <h3>{{ request.user.post_set.count }}</h3>
+
+                <span>Posts</span>
+
+            </div>
+
+            <div>
+
+                <h3>120</h3>
+
+                <span>Connections</span>
+
+            </div>
+
+            <div>
+
+                <h3>320</h3>
+
+                <span>Followers</span>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- Buttons -->
+
+        <div class="profile-buttons">
+
+            <a href="{% url 'edit_profile' %}" class="edit-btn">
+
+                <i class="fa-solid fa-user-pen"></i>
+
+                Edit Profile
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Quick Links -->
+
+    <div class="card quick-links">
+
+        <h3>
+
+            <i class="fa-solid fa-bolt"></i>
+
+            Quick Links
+
+        </h3>
+
+        <ul>
+
+            <li>
+
+                <a href="#">
+
+                    <i class="fa-solid fa-user-group"></i>
+
+                    My Network
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#">
+
+                    <i class="fa-solid fa-bookmark"></i>
+
+                    Saved Posts
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#">
+
+                    <i class="fa-solid fa-image"></i>
+
+                    Photos
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#">
+
+                    <i class="fa-solid fa-video"></i>
+
+                    Videos
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    Events
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#">
+
+                    <i class="fa-solid fa-briefcase"></i>
+
+                    Jobs
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    My Profile
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="#">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    Settings
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Activity Card -->
+
+    <div class="card activity-card">
+
+        <h3>
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            Recent Activity
+
+        </h3>
+
+        <ul>
+
+            <li>👍 Liked 5 posts today</li>
+
+            <li>📝 Created 2 new posts</li>
+
+            <li>👥 15 profile visits</li>
+
+            <li>💬 3 unread messages</li>
+
+            <li>⭐ Profile reached 250 people</li>
+
+        </ul>
+
+    </div>
+
+</aside>
+
+<!-- ========================= CENTER FEED STARTS HERE ========================= -->
+<!-- ================= CENTER FEED ================= -->
+
+<div class="center-feed">
+
+<form class="create-post"
+      method="POST"
+      action="{% url 'create_post_page' %}"
+      enctype="multipart/form-data">
+
+{% csrf_token %}
+
+<textarea
+name="content"
+class="post-input"
+placeholder="What's on your mind?"
+required></textarea>
+
+<div class="post-options">
+
+<label class="post-option">
+
+📷 Photo
+
+<input type="file"
+       name="image"
+       hidden>
+
+</label>
+
+<span class="post-option">🎥 Video</span>
+
+<span class="post-option">📅 Event</span>
+
+</div>
+
+<button type="submit" class="publish-btn">
+
+Publish
+
+</button>
+
+</form>
+
+
+<div class="post-card">
+
+<div class="post-header">
+<img class="post-avatar">
+<div class="post-user">
+{% for post in posts %}
+
+<div class="post-card">
+
+<div class="post-header">
+
+{% if post.user.profile.profile_picture %}
+
+<img class="post-avatar"
+src="{{ post.user.profile.profile_picture.url }}">
+
+{% else %}
+
+<img class="post-avatar"
+src="{% static 'images/default (2).webp' %}">
+
+{% endif %}
+
+<div class="post-user">
+
+<h3>{{ post.user.username }}</h3>
+
+<span>
+
+{{ post.created_at|timesince }} ago
+
+</span>
+
+</div>
+
+</div>
+
+<div class="post-content">
+
+{{ post.content }}
+
+</div>
+
+{% if post.image %}
+
+<img class="post-image"
+
+src="{{ post.image.url }}">
+
+{% endif %}
+
+<div class="post-actions">
+
+<a href="{% url 'like_post' post.id %}" class="action-btn">
+
+❤️ Like ({{ post.likes.count }})
+
+</a>
+
+<a href="{% url 'add_comment' post.id %}" class="action-btn">
+
+💬 Comment
+
+</a>
+
+<div class="action-btn">
+
+↗ Share
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="post-card">
+
+<h3>No posts yet.</h3>
+
+</div>
+
+{% endfor %}
+
+
+<div class="post-actions">
+
+<div class="action-btn like-btn">
+❤️ Like
+</div>
+
+<div class="action-btn">
+💬 Comment
+</div>
+
+<div class="action-btn">
+↗ Share
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+<!-- ===================================================== -->
+<!-- ================= RIGHT SIDEBAR ====================== -->
+<!-- ===================================================== -->
+
+<aside class="right-sidebar">
+
+    <!-- Profile Completion -->
+
+    <div class="card">
+
+        <h3>
+            <i class="fa-solid fa-chart-line"></i>
+            Profile Strength
+        </h3>
+
+        <div class="progress-box">
+
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+
+            <p>80% Complete</p>
+
+            <small>
+                Add more profile information to attract connections.
+            </small>
+
+        </div>
+
+    </div>
+
+    <!-- Suggested Connections -->
+
+    <div class="card">
+
+        <h3>
+            <i class="fa-solid fa-user-group"></i>
+            People You May Know
+        </h3>
+
+        <div class="suggestion">
+
+            <img src="https://i.pravatar.cc/100?img=5">
+
+            <div>
+
+                <h4>Rahul Sharma</h4>
+
+                <small>Python Developer</small>
+
+            </div>
+
+            <button class="connect-btn" onclick="connectUser(this)">
+    Connect
+</button>
+
+        </div>
+
+        <div class="suggestion">
+
+            <img src="https://i.pravatar.cc/100?img=8">
+
+            <div>
+
+                <h4>Priya Singh</h4>
+
+                <small>UI Designer</small>
+
+            </div>
+
+            <button class="connect-btn" onclick="connectUser(this)">
+    Connect
+</button>
+
+        </div>
+
+        <div class="suggestion">
+
+            <img src="https://i.pravatar.cc/100?img=11">
+
+            <div>
+
+                <h4>David John</h4>
+
+                <small>Full Stack Developer</small>
+
+            </div>
+
+           <button class="connect-btn" onclick="connectUser(this)">
+    Connect
+</button>
+
+        </div>
+
+    </div>
+
+    <!-- Messages -->
+
+    <div class="card">
+
+        <h3>
+
+            <i class="fa-solid fa-comment-dots"></i>
+
+            Recent Messages
+
+        </h3>
+
+        <ul class="message-list">
+
+            <li>
+                💬 Rahul: Are you free today?
+            </li>
+
+            <li>
+                💬 Priya: Nice project!
+            </li>
+
+            <li>
+                💬 Alex: Let's connect.
+            </li>
+
+            <li>
+                💬 John: Interview update.
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Notifications -->
+
+    <div class="card">
+
+        <h3>
+
+            <i class="fa-solid fa-bell"></i>
+
+            Notifications
+
+        </h3>
+
+        <ul class="notification-list">
+
+            <li>❤️ Rahul liked your post</li>
+
+            <li>👥 New connection request</li>
+
+            <li>💬 You received a new message</li>
+
+            <li>🔥 Your post reached 250 people</li>
+
+            <li>⭐ Profile viewed 18 times today</li>
+
+        </ul>
+
+    </div>
+
+    <!-- Trending -->
+
+    <div class="card">
+
+        <h3>
+
+            <i class="fa-solid fa-fire"></i>
+
+            Trending Topics
+
+        </h3>
+
+        <ul class="trending-list">
+
+            <li>#Python</li>
+
+            <li>#Django</li>
+
+            <li>#ArtificialIntelligence</li>
+
+            <li>#MachineLearning</li>
+
+            <li>#WebDevelopment</li>
+
+            <li>#SoftwareEngineering</li>
+
+        </ul>
+
+    </div>
+
+    <!-- Events -->
+
+    <div class="card">
+
+        <h3>
+
+            <i class="fa-solid fa-calendar-days"></i>
+
+            Upcoming Events
+
+        </h3>
+
+        <div class="event">
+
+            <strong>Django Workshop</strong>
+
+            <p>20 July 2026</p>
+
+        </div>
+
+        <div class="event">
+
+            <strong>Hackathon 2026</strong>
+
+            <p>28 July 2026</p>
+
+        </div>
+
+        <div class="event">
+
+            <strong>AI Conference</strong>
+
+            <p>5 August 2026</p>
+
+        </div>
+
+    </div>
+
+    <!-- Advertisement -->
+
+    <div class="card">
+
+        <h3>
+
+            Sponsored
+
+        </h3>
+
+        <img src="https://picsum.photos/300/180"
+             style="width:100%;border-radius:10px;">
+
+        <p style="margin-top:10px;">
+            Learn Full Stack Development and build industry-ready projects.
+        </p>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="card">
+
+        <center>
+
+            <strong>ConnectMe</strong>
+
+            <br><br>
+
+            <small>
+
+                © 2026 ConnectMe
+
+                <br>
+
+                Professional Networking Platform
+
+            </small>
+
+        </center>
+
+    </div>
+
+</aside>
+<script src="{% static 'js/new.js' %}"></script>
