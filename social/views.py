@@ -13,16 +13,9 @@ from django.shortcuts import render, redirect
 
 
 # Home page
-@login_required
 def home(request):
-
-    posts = Post.objects.all().order_by("-created_at")
-
-    return render(request, "home.html", {
-
-        "posts": posts
-
-    })
+    posts = Post.objects.all()
+    return render(request, 'home.html', {'posts': posts})
 
 
 
